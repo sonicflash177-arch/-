@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Learning — تعلّم البرمجة</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      background: #f4f7ff;
+      color: #0b1b2f;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #1e1b4b 0%, #4338ca 50%, #7c3aed 100%);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 8px 30px rgba(67, 56, 202, 0.35);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover { transform: scale(1.05); }
+
+    .logo i {
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #e0e7ff;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      border-radius: 30px;
+      transition: all 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fbbf24;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 5rem 0 4rem;
+      text-align: center;
+      background: radial-gradient(circle at 20% 20%, #dbeafe 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, #fce7f3 0%, transparent 50%),
+                  linear-gradient(135deg, #eef2ff 0%, #fdf4ff 100%);
+      border-bottom: 1px solid #e0e7ff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '</>';
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 8rem;
+      font-weight: 900;
+      color: rgba(124, 58, 237, 0.06);
+      font-family: monospace;
+    }
+
+    .hero::after {
+      content: '{ }';
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      font-size: 7rem;
+      font-weight: 900;
+      color: rgba(37, 99, 235, 0.06);
+      font-family: monospace;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+      line-height: 1.25;
+      background: linear-gradient(135deg, #4338ca, #db2777, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 6s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #334155;
+      max-width: 750px;
+      margin: 0 auto 2rem;
+      font-weight: 400;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      color: #fff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(244, 114, 182, 0.35);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #1e1b4b, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      font-size: 1.15rem;
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cards-section {
+      padding: 4rem 0 5rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 2rem;
+      padding: 2.2rem 1.8rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid transparent;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+    }
+
+    .card[data-lang="html"] {
+      background: linear-gradient(145deg, #fff7ed 0%, #ffffff 60%);
+      border-color: #fed7aa;
+    }
+    .card[data-lang="html"]:hover {
+      box-shadow: 0 25px 50px -12px rgba(234, 88, 12, 0.3);
+      border-color: #f97316;
+    }
+    .card[data-lang="html"] .card-icon {
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      color: #fff;
+    }
+
+    .card[data-lang="css"] {
+      background: linear-gradient(145deg, #eff6ff 0%, #ffffff 60%);
+      border-color: #bfdbfe;
+    }
+    .card[data-lang="css"]:hover {
+      box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.3);
+      border-color: #3b82f6;
+    }
+    .card[data-lang="css"] .card-icon {
+      background: linear-gradient(135deg, #2563eb, #38bdf8);
+      color: #fff;
+    }
+
+    .card[data-lang="python"] {
+      background: linear-gradient(145deg, #fefce8 0%, #ffffff 60%);
+      border-color: #fde68a;
+    }
+    .card[data-lang="python"]:hover {
+      box-shadow: 0 25px 50px -12px rgba(202, 138, 4, 0.3);
+      border-color: #eab308;
+    }
+    .card[data-lang="python"] .card-icon {
+      background: linear-gradient(135deg, #eab308, #84cc16);
+      color: #fff;
+    }
+
+    .card[data-lang="scratch"] {
+      background: linear-gradient(145deg, #fdf4ff 0%, #ffffff 60%);
+      border-color: #e9d5ff;
+    }
+    .card[data-lang="scratch"]:hover {
+      box-shadow: 0 25px 50px -12px rgba(147, 51, 234, 0.3);
+      border-color: #a855f7;
+    }
+    .card[data-lang="scratch"] .card-icon {
+      background: linear-gradient(135deg, #9333ea, #ec4899);
+      color: #fff;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      width: 75px;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 22px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-icon {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .card h3 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      margin-bottom: 0.7rem;
+      color: #0b1b2f;
+    }
+
+    .card p {
+      color: #475569;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-tags span {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.06);
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .btn-learn {
+      color: white;
+      border: none;
+      padding: 0.95rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.25s;
+      width: 100%;
+      font-family: 'Cairo', sans-serif;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .card[data-lang="html"] .btn-learn { background: linear-gradient(135deg, #ea580c, #f97316); }
+    .card[data-lang="css"] .btn-learn { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+    .card[data-lang="python"] .btn-learn { background: linear-gradient(135deg, #ca8a04, #eab308); }
+    .card[data-lang="scratch"] .btn-learn { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+
+    .btn-learn:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .features-section {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .features-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .features-section .section-title {
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .features-section .section-subtitle {
+      color: #c7d2fe;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .feature-box:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-8px);
+      border-color: #fbbf24;
+    }
+
+    .feature-box i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fbbf24, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .feature-box h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+
+    .feature-box p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .roadmap-section {
+      padding: 5rem 0;
+      background: #fff;
+    }
+
+    .roadmap {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 5%;
+      right: 5%;
+      height: 4px;
+      background: linear-gradient(90deg, #f97316, #3b82f6, #eab308, #a855f7);
+      border-radius: 10px;
+      z-index: 1;
+    }
+
+    .roadmap-step {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .roadmap-step .circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 900;
+      border: 5px solid #fff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s;
+    }
+
+    .roadmap-step:hover .circle { transform: scale(1.15); }
+
+    .roadmap-step:nth-child(1) .circle { background: linear-gradient(135deg, #ea580c, #f97316); }
+    .roadmap-step:nth-child(2) .circle { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+    .roadmap-step:nth-child(3) .circle { background: linear-gradient(135deg, #ca8a04, #eab308); }
+    .roadmap-step:nth-child(4) .circle { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+
+    .roadmap-step h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .roadmap-step p {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .cta-section {
+      padding: 5rem 0;
+      text-align: center;
+      background: linear-gradient(135deg, #4338ca, #7c3aed, #db2777);
+      color: #fff;
+    }
+
+    .cta-section h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-btn {
+      background: #fff;
+      color: #4338ca;
+      border: none;
+      padding: 1.1rem 3rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Cairo', sans-serif;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .language-page {
+      display: none;
+      padding: 3rem 0 5rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .language-page.active-page { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 2px solid #e0e7ff;
+      color: #4338ca;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      font-family: 'Cairo', sans-serif;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .back-btn:hover {
+      background: #4338ca;
+      color: #fff;
+      transform: translateX(-5px);
+    }
+
+    .lang-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-header .lang-icon {
+      font-size: 3rem;
+      width: 100px;
+      height: 100px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    #htmlPage .lang-icon { background: linear-gradient(135deg, #ea580c, #f97316); }
+    #cssPage .lang-icon { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+    #pythonPage .lang-icon { background: linear-gradient(135deg, #ca8a04, #eab308); }
+    #scratchPage .lang-icon { background: linear-gradient(135deg, #7e22ce, #a855f7); }
+
+    .lang-header h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #0b1b2f;
+    }
+
+    .lang-description {
+      font-size: 1.2rem;
+      color: #334155;
+      max-width: 900px;
+      margin-bottom: 2.5rem;
+      padding-right: 1.5rem;
+      border-right: 5px solid;
+      font-weight: 400;
+    }
+
+    #htmlPage .lang-description { border-color: #f97316; }
+    #cssPage .lang-description { border-color: #3b82f6; }
+    #pythonPage .lang-description { border-color: #eab308; }
+    #scratchPage .lang-description { border-color: #a855f7; }
+
+    .video-section-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .video-section-title i {
+      font-size: 1.8rem;
+    }
+
+    #htmlPage .video-section-title i { color: #f97316; }
+    #cssPage .video-section-title i { color: #3b82f6; }
+    #pythonPage .video-section-title i { color: #eab308; }
+    #scratchPage .video-section-title i { color: #a855f7; }
+
+    .video-section-sub {
+      color: #64748b;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .video-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 2px solid #f1f5f9;
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    #htmlPage .video-card:hover { border-color: #f97316; }
+    #cssPage .video-card:hover { border-color: #3b82f6; }
+    #pythonPage .video-card:hover { border-color: #eab308; }
+    #scratchPage .video-card:hover { border-color: #a855f7; }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-info {
+      padding: 1.5rem;
+    }
+
+    .video-info h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #0b1b2f;
+    }
+
+    .video-info p {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .video-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    #htmlPage .video-badge { background: #f97316; }
+    #cssPage .video-badge { background: #3b82f6; }
+    #pythonPage .video-badge { background: #eab308; }
+    #scratchPage .video-badge { background: #a855f7; }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.8rem;
+    }
+
+    .resource-item {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      border: 2px solid #f1f5f9;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s;
+    }
+
+    .resource-item:hover {
+      transform: translateY(-6px);
+      border-color: #c7d2fe;
+      box-shadow: 0 15px 30px rgba(67, 56, 202, 0.12);
+    }
+
+    .resource-item i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    #htmlPage .resource-item i { color: #f97316; }
+    #cssPage .resource-item i { color: #3b82f6; }
+    #pythonPage .resource-item i { color: #eab308; }
+    #scratchPage .resource-item i { color: #a855f7; }
+
+    .resource-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      color: #0b1b2f;
+    }
+
+    .resource-item p {
+      color: #475569;
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .footer {
+      background: #0b1b2f;
+      color: #cbd5e1;
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #94a3b8;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: #fbbf24; }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid #1e293b;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom i { color: #db2777; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.2rem; }
+      .navbar .container { flex-direction: column; gap: 0.8rem; }
+      .hero h1 { font-size: 2.3rem; }
+      .hero p { font-size: 1.05rem; }
+      .section-title { font-size: 1.9rem; }
+      .lang-header h2 { font-size: 2rem; }
+      .lang-icon { width: 75px; height: 75px; font-size: 2rem; }
+      .roadmap::before { display: none; }
+      .roadmap { flex-direction: column; align-items: center; }
+      .roadmap-step { width: 100%; }
+      .cta-section h2 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="logo" onclick="showHome()">
+      <i class="fas fa-code"></i> Code Learning
+    </div>
+    <div class="nav-links">
+      <a href="#" onclick="showHome(); return false;">الرئيسية</a>
+      <a href="#" onclick="showLanguage('html'); return false;">HTML</a>
+      <a href="#" onclick="showLanguage('css'); return false;">CSS</a>
+      <a href="#" onclick="showLanguage('python'); return false;">Python</a>
+      <a href="#" onclick="showLanguage('scratch'); return false;">Scratch</a>
+    </div>
+  </div>
+</nav>
+
+<main id="mainContainer">
+
+  <div id="homeView">
+
+    <section class="hero">
+      <div class="container">
+        <div class="badge"><i class="fas fa-rocket"></i> ابدأ رحلتك البرمجية اليوم</div>
+        <h1>تعلّم البرمجة من الصفر<br>بأسلوب عصري وممتع</h1>
+        <p>منصّة "Code Learning" تمنحك كل ما تحتاجه لإتقان HTML، CSS، Python، و Scratch — خطوة بخطوة مع فيديوهات تعليمية.</p>
+      </div>
+    </section>
+
+    <section class="cards-section">
+      <div class="container">
+        <h2 class="section-title">اختر مسارك التعليمي</h2>
+        <p class="section-subtitle">أربع لغات أساسية تفتح لك أبواب عالم البرمجة — كل واحدة بفيديوهات تعليمية حصرية</p>
+        <div class="cards-grid">
+
+          <div class="card" data-lang="html" onclick="showLanguage('html')">
+            <div class="card-icon"><i class="fab fa-html5"></i></div>
+            <h3>HTML</h3>
+            <p>لغة هيكلة صفحات الويب. تعلّم كيفية بناء أساس أي موقع إلكتروني باستخدام الوسوم الدلالية.</p>
+            <div class="card-tags"><span>وسوم</span><span>نماذج</span><span>وسائط</span></div>
+            <button class="btn-learn" onclick="event.stopPropagation(); showLanguage('html')">
+              ابدأ الآن <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="card" data-lang="css" onclick="showLanguage('css')">
+            <div class="card-icon"><i class="fab fa-css3-alt"></i></div>
+            <h3>CSS</h3>
+            <p>لغة تنسيق صفحات الويب. أضف الألوان والتنسيقات والتصميمات المتجاوبة لمواقعك.</p>
+            <div class="card-tags"><span>ألوان</span><span>Flexbox</span><span>Grid</span></div>
+            <button class="btn-learn" onclick="event.stopPropagation(); showLanguage('css')">
+              ابدأ الآن <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="card" data-lang="python" onclick="showLanguage('python')">
+            <div class="card-icon"><i class="fab fa-python"></i></div>
+            <h3>Python</h3>
+            <p>لغة برمجة قوية ومتعددة الاستخدامات. مثالية للأتمتة وتحليل البيانات والذكاء الاصطناعي.</p>
+            <div class="card-tags"><span>متغيرات</span><span>حلقات</span><span>دوال</span></div>
+            <button class="btn-learn" onclick="event.stopPropagation(); showLanguage('python')">
+              ابدأ الآن <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="card" data-lang="scratch" onclick="showLanguage('scratch')">
+            <div class="card-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <h3>Scratch</h3>
+            <p>برمجة مرئية بالبلوكات. أنشئ ألعاباً وقصصاً تفاعلية دون كتابة سطر كود واحد.</p>
+            <div class="card-tags"><span>بلوكات</span><span>ألعاب</span><span>رسوم متحركة</span></div>
+            <button class="btn-learn" onclick="event.stopPropagation(); showLanguage('scratch')">
+              ابدأ الآن <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">لماذا Code Learning؟</h2>
+        <p class="section-subtitle">نوفّر لك بيئة تعليمية متكاملة تجمع بين البساطة والاحترافية</p>
+        <div class="features-grid">
+          <div class="feature-box">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>محتوى مبسّط</h4>
+            <p>شروحات واضحة وأمثلة عملية تناسب المبتدئين تماماً.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fas fa-laptop-code"></i>
+            <h4>تطبيق عملي</h4>
+            <p>مشاريع حقيقية بعد كل درس لتثبيت المفاهيم.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fas fa-video"></i>
+            <h4>فيديوهات HD</h4>
+            <p>محتوى مرئي عالي الجودة لكل لغة برمجة.</p>
+          </div>
+          <div class="feature-box">
+            <i class="fas fa-infinity"></i>
+            <h4>وصول مدى الحياة</h4>
+            <p>تعلّم في أي وقت ومن أي مكان بدون قيود.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="roadmap-section">
+      <div class="container">
+        <h2 class="section-title">خارطة طريق التعلّم</h2>
+        <p class="section-subtitle">ابدأ من HTML وانتهي بإتقان البرمجة كاملة</p>
+        <div class="roadmap">
+          <div class="roadmap-step">
+            <div class="circle"><i class="fab fa-html5"></i></div>
+            <h4>HTML</h4>
+            <p>الأساس والهيكل</p>
+          </div>
+          <div class="roadmap-step">
+            <div class="circle"><i class="fab fa-css3-alt"></i></div>
+            <h4>CSS</h4>
+            <p>التنسيق والتصميم</p>
+          </div>
+          <div class="roadmap-step">
+            <div class="circle"><i class="fab fa-python"></i></div>
+            <h4>Python</h4>
+            <p>المنطق والبرمجة</p>
+          </div>
+          <div class="roadmap-step">
+            <div class="circle"><i class="fas fa-puzzle-piece"></i></div>
+            <h4>Scratch</h4>
+            <p>الإبداع والمرح</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>جاهز لبدء رحلتك؟</h2>
+        <p>انضم إلى آلاف المتعلمين وابدأ رحلتك البرمجية الآن مجاناً</p>
+        <button class="cta-btn" onclick="document.querySelector('.cards-section').scrollIntoView({behavior:'smooth'})">
+          اختر لغتك الآن <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="htmlPage" class="language-page">
+    <div class="container">
+      <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-right"></i> العودة للرئيسية</button>
+      <div class="lang-header">
+        <div class="lang-icon"><i class="fab fa-html5"></i></div>
+        <h2>HTML</h2>
+      </div>
+      <div class="lang-description">
+        HTML (HyperText Markup Language) هي اللغة الأساسية لبناء صفحات الويب. تعلّم كيفية إنشاء الهيكل والوسوم الدلالية التي تشكل أساس أي موقع إلكتروني.
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-video"></i> فيديوهات تعليمية</h3>
+      <p class="video-section-sub">شاهد الدروس وطبّقها خطوة بخطوة</p>
+      <div class="videos-grid">
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/qz0aGYrrlhU" title="HTML Tutorial for Beginners" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">مبتدئ</span>
+            <h4>دورة HTML كاملة للمبتدئين</h4>
+            <p>تعرّف على أساسيات HTML والوسوم الأساسية لبناء صفحة ويب كاملة.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/UB1O30fR-EE" title="HTML Crash Course" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متوسط</span>
+            <h4>HTML Crash Course</h4>
+            <p>دورة سريعة ومكثفة تغطي جميع مفاهيم HTML الأساسية والمتقدمة.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/1Rs2ND1ryYc" title="Build Full Website" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">تطبيقي</span>
+            <h4>بناء موقع كامل بـ HTML</h4>
+            <p>مشروع عملي لبناء موقع ويب كامل باستخدام HTML.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-book-open"></i> مصادر إضافية</h3>
+      <p class="video-section-sub">محتوى نصي لتقوية فهمك لـ HTML</p>
+      <div class="resources-grid">
+        <div class="resource-item">
+          <i class="fas fa-file-code"></i>
+          <h4>الهيكل والوسوم الدلالية</h4>
+          <p>تعلّم الوسوم الأساسية مثل header، section، article، و footer.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-link"></i>
+          <h4>الروابط والوسائط</h4>
+          <p>إضافة الروابط والصور والفيديو لجعل صفحتك تفاعلية.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-table"></i>
+          <h4>الجداول والنماذج</h4>
+          <p>بناء جداول منظمة ونماذج إدخال بيانات احترافية.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cssPage" class="language-page">
+    <div class="container">
+      <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-right"></i> العودة للرئيسية</button>
+      <div class="lang-header">
+        <div class="lang-icon"><i class="fab fa-css3-alt"></i></div>
+        <h2>CSS</h2>
+      </div>
+      <div class="lang-description">
+        CSS (Cascading Style Sheets) هي لغة تنسيق صفحات الويب. تعلّم كيفية إضافة الألوان والخطوط والتصميمات المتجاوبة لتحويل صفحات HTML البسيطة إلى مواقع احترافية.
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-video"></i> فيديوهات تعليمية</h3>
+      <p class="video-section-sub">شاهد الدروس وطبّقها خطوة بخطوة</p>
+      <div class="videos-grid">
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/yfoY53QXEnI" title="CSS Tutorial for Beginners" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">مبتدئ</span>
+            <h4>دورة CSS كاملة للمبتدئين</h4>
+            <p>تعرّف على أساسيات CSS والمحددات والخصائص الأساسية.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/1PnVor36_40" title="CSS Flexbox" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متوسط</span>
+            <h4>شرح Flexbox كامل</h4>
+            <p>تعلّم نظام Flexbox لبناء تخطيطات مرنة واحترافية.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/jV8B24rSN5o" title="CSS Grid" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متقدم</span>
+            <h4>CSS Grid بالتفصيل</h4>
+            <p>إتقان نظام Grid لعمل تخطيطات معقدة بسهولة.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-book-open"></i> مصادر إضافية</h3>
+      <p class="video-section-sub">محتوى نصي لتقوية فهمك لـ CSS</p>
+      <div class="resources-grid">
+        <div class="resource-item">
+          <i class="fas fa-paint-brush"></i>
+          <h4>المحددات والخصائص</h4>
+          <p>تعلّم كيفية استهداف العناصر وتطبيق الألوان والخطوط.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-arrows-alt"></i>
+          <h4>Flexbox و Grid</h4>
+          <p>بناء تخطيطات حديثة ومتجاوبة باستخدام الأنظمة الحديثة.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-mobile-alt"></i>
+          <h4>التصميم المتجاوب</h4>
+          <p>Media Queries لجعل موقعك يعمل على جميع الأجهزة.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pythonPage" class="language-page">
+    <div class="container">
+      <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-right"></i> العودة للرئيسية</button>
+      <div class="lang-header">
+        <div class="lang-icon"><i class="fab fa-python"></i></div>
+        <h2>Python</h2>
+      </div>
+      <div class="lang-description">
+        Python هي لغة برمجة عالية المستوى، معروفة ببساطتها وقوتها. مثالية للمبتدئين والمحترفين على حد سواء، وتُستخدم في تطوير الويب والذكاء الاصطناعي وتحليل البيانات.
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-video"></i> فيديوهات تعليمية</h3>
+      <p class="video-section-sub">شاهد الدروس وطبّقها خطوة بخطوة</p>
+      <div class="videos-grid">
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/rfscVS0vtbw" title="Python Full Course" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">مبتدئ</span>
+            <h4>دورة Python كاملة للمبتدئين</h4>
+            <p>دورة شاملة تغطي أساسيات Python من الصفر حتى الاحتراف.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/kqtD5dpn9C8" title="Python Projects" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متوسط</span>
+            <h4>Python للمبتدئين - مشاريع</h4>
+            <p>تعلّم Python من خلال بناء مشاريع عملية حقيقية.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/_uQrJ0TkZlc" title="Python OOP" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متقدم</span>
+            <h4>البرمجة كائنية التوجه</h4>
+            <p>تعلّم OOP في Python باستخدام Classes و Objects.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-book-open"></i> مصادر إضافية</h3>
+      <p class="video-section-sub">محتوى نصي لتقوية فهمك لـ Python</p>
+      <div class="resources-grid">
+        <div class="resource-item">
+          <i class="fas fa-calculator"></i>
+          <h4>المتغيرات وأنواع البيانات</h4>
+          <p>الأرقام، النصوص، القوائم، والقواميس في Python.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-code-branch"></i>
+          <h4>التحكم في التدفق</h4>
+          <p>الجمل الشرطية والحلقات التكرارية والدوال.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-cubes"></i>
+          <h4>الوحدات والمكتبات</h4>
+          <p>استخدام مكتبات مثل math و random و pandas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="scratchPage" class="language-page">
+    <div class="container">
+      <button class="back-btn" onclick="showHome()"><i class="fas fa-arrow-right"></i> العودة للرئيسية</button>
+      <div class="lang-header">
+        <div class="lang-icon"><i class="fas fa-puzzle-piece"></i></div>
+        <h2>Scratch</h2>
+      </div>
+      <div class="lang-description">
+        Scratch هي لغة برمجة مرئية تعتمد على البلوكات، مثالية للمبتدئين والأطفال. تعلّم إنشاء الألعاب والرسوم المتحركة والقصص التفاعلية دون كتابة كود.
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-video"></i> فيديوهات تعليمية</h3>
+      <p class="video-section-sub">شاهد الدروس وطبّقها خطوة بخطوة</p>
+      <div class="videos-grid">
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/5x3d1l6dH_c" title="Scratch Tutorial" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">مبتدئ</span>
+            <h4>مقدمة في Scratch</h4>
+            <p>تعرّف على واجهة Scratch وكيفية إنشاء أول مشروع لك.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/jLBvJ5iOaZ8" title="Scratch Game" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">متوسط</span>
+            <h4>صنع لعبة كاملة بـ Scratch</h4>
+            <p>ابنِ لعبة تفاعلية كاملة خطوة بخطوة باستخدام البلوكات.</p>
+          </div>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Anr7pLNb8ng" title="Scratch Animation" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-info">
+            <span class="video-badge">إبداعي</span>
+            <h4>الرسوم المتحركة في Scratch</h4>
+            <p>أنشئ قصة متحركة ممتعة باستخدام الرسوم والأصوات.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="video-section-title"><i class="fas fa-book-open"></i> مصادر إضافية</h3>
+      <p class="video-section-sub">محتوى نصي لتقوية فهمك لـ Scratch</p>
+      <div class="resources-grid">
+        <div class="resource-item">
+          <i class="fas fa-dragon"></i>
+          <h4>الكائنات والخلفيات</h4>
+          <p>إضافة الشخصيات والمشاهد لبناء عالم مشروعك.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-code"></i>
+          <h4>البلوكات والأحداث</h4>
+          <p>استخدام البلوكات للتحكم في سلوك الكائنات.</p>
+        </div>
+        <div class="resource-item">
+          <i class="fas fa-volume-up"></i>
+          <h4>الأصوات والرسم</h4>
+          <p>إضافة الموسيقى والمؤثرات الصوتية والرسم بالقلم.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4><i class="fas fa-code"></i> Code Learning</h4>
+        <p style="color:#94a3b8; font-size:0.9rem;">منصة تعليمية عربية متخصصة في تعليم البرمجة من الصفر بأسلوب عصري وممتع.</p>
+      </div>
+      <div class="footer-col">
+        <h4>اللغات</h4>
+        <a href="#" onclick="showLanguage('html'); return false;">HTML</a>
+        <a href="#" onclick="showLanguage('css'); return false;">CSS</a>
+        <a href="#" onclick="showLanguage('python'); return false;">Python</a>
+        <a href="#" onclick="showLanguage('scratch'); return false;">Scratch</a>
+      </div>
+      <div class="footer-col">
+      </div>
+      <div class="footer-col">
+        
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Code Learning — جميع الحقوق محفوظة. صُنع بـ <i class="fas fa-heart"></i> للمتعلمين العرب</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const homeView = document.getElementById('homeView');
+  const htmlPage = document.getElementById('htmlPage');
+  const cssPage = document.getElementById('cssPage');
+  const pythonPage = document.getElementById('pythonPage');
+  const scratchPage = document.getElementById('scratchPage');
+  const allPages = [htmlPage, cssPage, pythonPage, scratchPage];
+
+  function showHome() {
+    allPages.forEach(page => page.classList.remove('active-page'));
+    homeView.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showLanguage(lang) {
+    homeView.style.display = 'none';
+    allPages.forEach(page => page.classList.remove('active-page'));
+
+    let targetPage = null;
+    if (lang === 'html') targetPage = htmlPage;
+    else if (lang === 'css') targetPage = cssPage;
+    else if (lang === 'python') targetPage = pythonPage;
+    else if (lang === 'scratch') targetPage = scratchPage;
+
+    if (targetPage) targetPage.classList.add('active-page');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.showHome = showHome;
+  window.showLanguage = showLanguage;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    homeView.style.display = 'block';
+    allPages.forEach(page => page.classList.remove('active-page'));
+  });
+</script>
+
+</body>
+</html>
